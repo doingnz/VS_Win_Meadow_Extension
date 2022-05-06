@@ -87,6 +87,11 @@ namespace Meadow
                 MenuCommand menuMeadowDeviceListComboGetListCommand = new OleMenuCommand(new EventHandler(OnMeadowDeviceListComboGetList), menuMeadowDeviceListComboGetListCommandID);
                 mcs.AddCommand(menuMeadowDeviceListComboGetListCommand);
             }
+
+            if (await GetServiceAsync(typeof(SVsActivityLog)) is IVsActivityLog vsActivityLog)
+			{
+                var hr = vsActivityLog.LogEntry((UInt32)__ACTIVITYLOG_ENTRYTYPE.ALE_INFORMATION, "Initialising", "Initialising Meadow Extension.");
+			}
         }
         #endregion
 
